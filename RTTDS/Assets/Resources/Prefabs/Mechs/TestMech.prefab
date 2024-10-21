@@ -52,6 +52,7 @@ MonoBehaviour:
   rb: {fileID: 8752109722680379058}
   speed_max: 50
   speed_rotation: 150
+  speed_rotationTurret: 100
   uniqueName: 
   controller: {fileID: 0}
   sprite_propulsion: {fileID: 4695751737258248437}

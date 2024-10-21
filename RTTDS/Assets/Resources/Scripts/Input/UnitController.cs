@@ -49,7 +49,7 @@ public class UnitController : MonoBehaviour
 
         // Add listeners from Entity.cs
         OnShoot.AddListener(d.HandleShoot);
-        OnMoveBody.AddListener(d.HandleMoveBody);
+        OnMoveBody.AddListener(d.Move);
         OnMoveTurret.AddListener(d.HandleTurretMovement);
     }
 
@@ -75,7 +75,7 @@ public class UnitController : MonoBehaviour
 
     private void InputBody(Actor p)
     {
-        Vector2 movementVector = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+        Vector2 movementVector = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         OnMoveBody?.Invoke(movementVector.normalized);
     }
 
