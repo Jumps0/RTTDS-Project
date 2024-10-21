@@ -51,6 +51,14 @@ public class UnitController : MonoBehaviour
         OnShoot.AddListener(d.HandleShoot);
         OnMoveBody.AddListener(d.Move);
         OnMoveTurret.AddListener(d.HandleTurretMovement);
+
+        // Apply vision prefab
+	// (The original vision shaders & setup is by 'aarthificial': https://www.youtube.com/watch?v=XWMPEE8O05c)
+        if(d.vision_component == null)
+        {
+            GameObject vision = Instantiate(GameManager.inst.prefab_vision, d.transform.position, Quaternion.identity);
+            vision.transform.parent = d.transform;
+        }
     }
 
     public void DropDirectControl(Actor d)

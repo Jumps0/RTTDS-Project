@@ -4,6 +4,7 @@ public class Actor : Entity
 {
     [Header("Control")]
     public UnitController controller;
+    public GameObject vision_component;
 
     [Header("Visuals")]
     public SpriteRenderer sprite_propulsion;

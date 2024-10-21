@@ -2,7 +2,7 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!78 &1
 TagManager:
-  serializedVersion: 2
+  serializedVersion: 3
   tags: []
   layers:
   - Default
@@ -11,8 +11,8 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
+  - Lights
+  - Entities
   - 
   - 
   - 
@@ -41,3 +41,14 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Background
+    uniqueID: 4159335093
+    locked: 0
+  - name: Structures
+    uniqueID: 3983183265
+    locked: 0
+  - name: Entities
+    uniqueID: 2970601003
+    locked: 0
+  m_RenderingLayers:
+  - Default

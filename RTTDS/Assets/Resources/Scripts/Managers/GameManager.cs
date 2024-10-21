@@ -17,6 +17,10 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    [Header("Entities")]
     public List<Entity> entities = new List<Entity>();
     public List<Entity> Entities { get => entities; }
+
+    [Header("Prefabs")]
+    public GameObject prefab_vision;
 }
