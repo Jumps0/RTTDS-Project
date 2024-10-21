@@ -29,6 +29,7 @@ public class UnitController : MonoBehaviour
 
     public void Update()
     {
+        SelectionCheck();
         if (directControl != null)
         {
             CheckDirectInput();
@@ -45,6 +46,11 @@ public class UnitController : MonoBehaviour
         {
             indirectControl.Remove(d);
         }
+
+        // Add listeners from Entity.cs
+        OnShoot.AddListener(d.HandleShoot);
+        OnMoveBody.AddListener(d.HandleMoveBody);
+        OnMoveTurret.AddListener(d.HandleTurretMovement);
     }
 
     public void DropDirectControl(Actor d)
@@ -97,4 +103,39 @@ public class UnitController : MonoBehaviour
     }
 
     #endregion
+
+    private void SelectionCheck()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            Debug.Log("Checking...");
+
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit2D hit = Physics2D.GetRayIntersection(ray, Mathf.Infinity);
+
+            if (hit.collider != null && (hit.collider.gameObject.GetComponent<Actor>() || hit.collider.transform.parent.GetComponent<Actor>()))
+            {
+                Debug.Log("Hit!");
+                // Get the actor
+                Actor a = null;
+
+                if(hit.collider.gameObject.GetComponent<Actor>() != null)
+                {
+                    a = hit.collider.gameObject.GetComponent<Actor>();
+                }
+                else if (hit.collider.transform.parent.GetComponent<Actor>())
+                {
+                    a = hit.collider.transform.parent.GetComponent<Actor>();
+                }
+
+                // Not currently being controlled by someone else?
+                if(a.controller == null)
+                {
+                    // Select it
+                    SetDirectControl(a);
+                    Debug.Log("Selected: " + a);
+                }
+            }
+        }
+    }
 }

@@ -21,13 +21,22 @@ public class ControlManager : MonoBehaviour
         }
 
         // DEBUG for singleplayer
-        AddController(new UnitController());
+        CreateNewController();
     }
 
     [Header("Controllers")]
     public List<UnitController> controllers = new List<UnitController>();
+    [SerializeField] private GameObject prefab_controller;
 
     #region Utilities
+    public void CreateNewController()
+    {
+        GameObject c = Instantiate(prefab_controller, Vector3.zero, Quaternion.identity); // Create a new controller based on the prefab
+        c.transform.parent = this.transform; // Assign parent to this so we can track it better
+
+        AddController(c.GetComponent<UnitController>());
+    }
+
     public void AddController(UnitController c)
     {
         controllers.Add(c);
@@ -36,6 +45,7 @@ public class ControlManager : MonoBehaviour
     public void RemoveController(UnitController c)
     {
         controllers.Remove(c);
+        Destroy(c.gameObject);
     }
     #endregion
 }

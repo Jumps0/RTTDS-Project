@@ -330,6 +330,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controllers: []
+  prefab_controller: {fileID: 1084259185490469951, guid: 5810f4c84ca754045acd0645cbc0b053, type: 3}
 --- !u!1 &908297043
 GameObject:
   m_ObjectHideFlags: 0
@@ -778,6 +779,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3363462467910985609, guid: afa8c3d3cbbb9d44c9e1931ee5f8bb15, type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 419385456094870383, guid: 0000000000000000d000000000000000, type: 0}
     - target: {fileID: 3363462467910985609, guid: afa8c3d3cbbb9d44c9e1931ee5f8bb15, type: 3}
       propertyPath: m_Name
       value: TestMech

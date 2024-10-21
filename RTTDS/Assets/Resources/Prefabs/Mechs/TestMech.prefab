@@ -49,6 +49,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 448d50965800e8544908c2d6fbba8aaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rb: {fileID: 8752109722680379058}
+  speed_max: 50
+  speed_rotation: 150
   uniqueName: 
   controller: {fileID: 0}
   sprite_propulsion: {fileID: 4695751737258248437}
@@ -98,14 +101,14 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3363462467910985609}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDamping: 0
   m_AngularDamping: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
