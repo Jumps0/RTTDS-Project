@@ -73,6 +73,10 @@ public class HierarchyObjectColor
                     backgroundColor = new Color(0.6f, 0.15f, 0.45f);
                     textColor = new Color(0.9f, 0.9f, 0.9f);
                     break;
+                case "ControlManager":
+                    backgroundColor = new Color(0.9f, 0.4f, 0.4f);
+                    textColor = new Color(0.9f, 0.9f, 0.9f);
+                    break;
                 case "GameManager":
                     backgroundColor = new Color(0.2f, 0.55f, 0.45f);
                     textColor = new Color(0.9f, 0.9f, 0.9f);
