@@ -40,7 +40,7 @@ public class UnitController : MonoBehaviour
     public void SetDirectControl(Actor d)
     {
         d.controller = this;
-        d = directControl;
+        directControl = d;
 
         if (indirectControl.Contains(d))
         {
@@ -108,14 +108,11 @@ public class UnitController : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            Debug.Log("Checking...");
-
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit2D hit = Physics2D.GetRayIntersection(ray, Mathf.Infinity);
 
             if (hit.collider != null && (hit.collider.gameObject.GetComponent<Actor>() || hit.collider.transform.parent.GetComponent<Actor>()))
             {
-                Debug.Log("Hit!");
                 // Get the actor
                 Actor a = null;
 
@@ -133,7 +130,6 @@ public class UnitController : MonoBehaviour
                 {
                     // Select it
                     SetDirectControl(a);
-                    Debug.Log("Selected: " + a);
                 }
             }
         }

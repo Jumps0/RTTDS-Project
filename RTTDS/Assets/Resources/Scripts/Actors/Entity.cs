@@ -12,6 +12,7 @@ public class Entity : MonoBehaviour
     private Vector2 movementVector;
     public float speed_max = 50f;
     public float speed_rotation = 150f;
+    public float speed_rotationTurret = 150f;
     //
     public string uniqueName;
     // ...
@@ -40,7 +41,13 @@ public class Entity : MonoBehaviour
 
     public void HandleTurretMovement(Vector2 pointerPosition)
     {
+        Transform turret = this.GetComponent<Actor>().sprite_mount.transform;
 
+        var turretDirection = (Vector3)pointerPosition - turret.position;
+        var desiredAngle = Mathf.Atan2(turretDirection.y, turretDirection.x) * Mathf.Rad2Deg;
+        var rotationStep = speed_rotationTurret * Time.deltaTime;
+
+        turret.rotation = Quaternion.RotateTowards(turret.rotation, Quaternion.Euler(0, 0, desiredAngle - 90), rotationStep);
     }
 
     public void FixedUpdate()
