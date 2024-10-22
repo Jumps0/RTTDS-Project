@@ -18,7 +18,6 @@ public class Entity : MonoBehaviour
     public float acceleration = 70f;
     public float deceleration = 50f;
     public float speed_current = 0;
-    public float currentForwardDirection = 1;
     //
     public string uniqueName;
     // ...
@@ -42,33 +41,21 @@ public class Entity : MonoBehaviour
 
     public void Move(Vector2 movementVector)
     {
+        // Where x: Horizontal (Rotation) & y: Vertical (Forward/Backward)
         this.movementVector = movementVector;
 
-        CalculateSpeed(movementVector);
-
-        if(movementVector.y > 0)
+        if (movementVector.y != 0)
         {
-            currentForwardDirection = 1;
-        }
-        else if (movementVector.y < 0)
-        {
-            currentForwardDirection = 0;
-        }
-
-    }
-
-    private void CalculateSpeed(Vector2 movementVector)
-    {
-        if(Mathf.Abs(movementVector.y) > 0)
-        {
-            speed_current += acceleration * Time.deltaTime;
+            // Accelerate forward or backward depending on input
+            speed_current = Mathf.MoveTowards(speed_current, movementVector.y * speed_max, acceleration * Time.deltaTime);
         }
         else
         {
-            speed_current -= deceleration * Time.deltaTime;
+            // Decelerate smoothly when no input is given
+            speed_current = Mathf.MoveTowards(speed_current, 0, deceleration * Time.deltaTime);
         }
-        speed_current = Mathf.Clamp(speed_current, 0, speed_max);
     }
+
 
     public void HandleTurretMovement(Vector2 pointerPosition)
     {
@@ -84,9 +71,12 @@ public class Entity : MonoBehaviour
     public void FixedUpdate()
     {
         // Velocity
-        rb.linearVelocity = (Vector2)transform.up * speed_current * currentForwardDirection * Time.fixedDeltaTime;
+        Vector2 moveDirection = transform.up * speed_current * Time.deltaTime;
+        rb.MovePosition(rb.position + moveDirection);
+
         // Rotation
-        rb.MoveRotation(transform.rotation * Quaternion.Euler(0, 0, -movementVector.x * speed_rotation * Time.fixedDeltaTime));
+        float rotationAmount = movementVector.x * speed_rotation * Time.deltaTime;
+        rb.MoveRotation(rb.rotation - rotationAmount);
     }
     #endregion
 }

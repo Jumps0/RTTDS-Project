@@ -53,17 +53,19 @@ public class UnitController : MonoBehaviour
         OnMoveTurret.AddListener(d.HandleTurretMovement);
 
         // Apply vision prefab
-	// (The original vision shaders & setup is by 'aarthificial': https://www.youtube.com/watch?v=XWMPEE8O05c)
+	    // (The original vision shaders & setup is by 'aarthificial': https://www.youtube.com/watch?v=XWMPEE8O05c)
         if(d.vision_component == null)
         {
             GameObject vision = Instantiate(GameManager.inst.prefab_vision, d.transform.position, Quaternion.identity);
             vision.transform.parent = d.transform;
+            d.vision_component = vision;
         }
     }
 
     public void DropDirectControl(Actor d)
     {
         d.controller = null;
+        Destroy(d.vision_component); // Change this later?
         d = null;
     }
 
@@ -84,7 +86,7 @@ public class UnitController : MonoBehaviour
     private void InputBody(Actor p)
     {
         Vector2 movementVector = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-        OnMoveBody?.Invoke(movementVector.normalized);
+        OnMoveBody?.Invoke(movementVector.normalized); // Links to --> Move(Vector2)
     }
 
     private void InputTurret(Actor p)
@@ -114,7 +116,8 @@ public class UnitController : MonoBehaviour
 
     private void SelectionCheck()
     {
-        if (Input.GetMouseButtonDown(0))
+        // Left click but not right clicking
+        if (Input.GetMouseButtonDown(0) && !Input.GetMouseButton(1))
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit2D hit = Physics2D.GetRayIntersection(ray, Mathf.Infinity);
