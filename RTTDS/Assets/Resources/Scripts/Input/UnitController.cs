@@ -92,7 +92,10 @@ public class UnitController : MonoBehaviour
     private void InputTurret(Actor p)
     {
         // TODO: Check if the player should be allowed to move the turret
-        OnMoveTurret?.Invoke(GetMousePosition());
+        if (Input.GetMouseButton(1)) // Hold down right click
+        {
+            OnMoveTurret?.Invoke(GetMousePosition());
+        }
     }
 
     private void InputFiring(Actor p)
